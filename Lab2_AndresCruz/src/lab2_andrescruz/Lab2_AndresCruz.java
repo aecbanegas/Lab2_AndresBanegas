@@ -24,7 +24,7 @@ public class Lab2_AndresCruz {
     public static void main(String[] args) {
         // TODO code application logic here
         int opc = 0;
-        boolean flag = false;
+        boolean flag = false;//Validar que se hizo el login
         while (opc != 4) {
             System.out.println("Usuario para login: " + login[0]);
             System.out.println("Contraseña para login: " + login[1]);
@@ -44,7 +44,7 @@ public class Lab2_AndresCruz {
                         + "Ingrese su opcion: ");
                 opc = s.nextInt();
             }
-            if (opc == 3) {
+            if (opc == 3) {//Login
                 System.out.println("Ingrese su usuario: ");
                 String usuario = s.next();
                 System.out.println("Ingrese la contraseña: ");
@@ -56,7 +56,7 @@ public class Lab2_AndresCruz {
                     System.out.println("Usuario o Contraseña Incorrectos");
                 }
             }
-            if (flag) {
+            if (flag) {//Permite usar las otras opciones luego de hacer el login
                 if (opc == 1) {
                     Registro();
                 }
@@ -69,10 +69,10 @@ public class Lab2_AndresCruz {
         }
     }
 
-    public static void ManejoTrafico() {
+    public static void ManejoTrafico() {//Hace el manejo del trafico aereo
         int contesp = 0, contlisto = 0;
         String Estacionado = "", Espera = "", Listo = "", Vuelo = "";
-        for (Object temp : lista) {
+        for (Object temp : lista) {//guarda en strings las listas de aviones en vuelo, estacionados, esperando y listos
             if (temp instanceof Avion) {
                 if (((Avion) temp).getEstado().equals("Estacionado")) {
                     Estacionado += lista.indexOf(temp) + "- " + temp + "\n";
@@ -95,7 +95,7 @@ public class Lab2_AndresCruz {
         System.out.println("Los aviones listos son: \n" + Listo);
         System.out.println("Los aviones en vuelo son: \n" + Vuelo);
         System.out.println("Ingrese la posicion en la lista del avion para cambiar su estado: ");
-        int posicion = s.nextInt();
+        int posicion = s.nextInt();//se pide la posicion en el arraylist
         while (posicion < 0 || posicion >= lista.size()) {
             System.out.println("Ingrese la posicion en la lista del avion para cambiar su estado: ");
             posicion = s.nextInt();
@@ -190,7 +190,7 @@ public class Lab2_AndresCruz {
         }
     }
 
-    public static boolean Log(String usu, String contra) {
+    public static boolean Log(String usu, String contra) {//valida el login
         if (usu.equals(login[0]) && contra.equals(login[1])) {
             return true;
         } else {
@@ -206,7 +206,7 @@ public class Lab2_AndresCruz {
                 + "Opcion 4: Borrar Aviones\n"
                 + "Ingrese una opcion: ");
         int opc = s.nextInt();
-        while (opc <= 0 || opc >= 5) {
+        while (opc <= 0 || opc >= 5) {//validacion
             System.out.println("Menu\n"
                     + "Opcion 1: Crear Aviones\n"
                     + "Opcion 2: Leer Aviones\n"
@@ -216,7 +216,7 @@ public class Lab2_AndresCruz {
             opc = s.nextInt();
         }
         switch (opc) {
-            case 1:
+            case 1://pide los datos para crear un nuevo avion
                 System.out.println("Ingrese el codigo del avion: ");
                 String cod = s.next();
                 while (valcod(cod)) {
@@ -240,7 +240,7 @@ public class Lab2_AndresCruz {
                 String ingcarg = s.nextLine();
                 lista.add(new Avion(cod, aniof, anioa, cap, peso, horas, motores, ingcarg));
                 break;
-            case 2:
+            case 2://muestra la lista de aviones
                 String salida = "";
                 for (Object temp : lista) {
                     if (temp instanceof Avion) {
@@ -249,7 +249,7 @@ public class Lab2_AndresCruz {
                 }
                 JOptionPane.showMessageDialog(null, salida);
                 break;
-            case 3:
+            case 3://Permite la modificacion de atributos de los aviones
                 System.out.println("Ingrese la posicion en la lista del avion: ");
                 int posicion = s.nextInt();
                 while (posicion < 0 || posicion >= lista.size()) {
@@ -280,7 +280,7 @@ public class Lab2_AndresCruz {
                             + "Que elemento desea cambiar?");
                     elemento = s.nextInt();
                 }
-                switch (elemento) {
+                switch (elemento) {//cambia el dato que el usuario decidio
                     case 1:
                         System.out.println("Ingrese el codigo del avion: ");
                         String codc = s.next();
@@ -328,7 +328,7 @@ public class Lab2_AndresCruz {
                         break;
                 }
                 break;
-            case 4:
+            case 4://Elimina los aviones
                 System.out.println("Ingrese la posicion en la lista del avion: ");
                 int posicionel = s.nextInt();
                 while (posicionel < 0 || posicionel >= lista.size()) {
@@ -336,11 +336,12 @@ public class Lab2_AndresCruz {
                     posicionel = s.nextInt();
                 }
                 lista.remove(posicionel);
+                System.out.println("Se elimino con exito.");
                 break;
         }
     }
 
-    public static boolean valcod(String codigo) {
+    public static boolean valcod(String codigo) {//Valida que el codigo sea alfanumerico con al menos un numero y una letra
         int letra = 0, numero = 0;
         for (int i = 0; i < codigo.length(); i++) {
             if (Character.isLetter(codigo.charAt(i))) {
